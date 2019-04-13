@@ -1,0 +1,28 @@
+<% include partials/header%>
+
+    <body style="background-color: #007eff; background-repeat: no-repeat; max-height: 100%; background-size: 1366px 720px; 1366px;" background="zz.jpg">
+     <div  style="background-color:#000000cc;  padding: 10px; margin-top: -1.75%; margin-left: 35%; height: 82%; width: 30%;">
+        
+                <a class="about" href="#aboutus" style="text-decoration: none;color: yellow; font-family: broadway; font-size: 28px;">Sign In</a><hr style="background-color: aliceblue;">
+            
+            
+            <form method="POST"  method="/login">
+                <div class="form-group">
+                    <label for="email" style="font-size: 20px; color: white;">Email:</label>
+                    <input type="email" class="form-control" id="email" style="border-radius: 10px;"  pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" placeholder="Enter email" name="username" required>
+                </div><hr>
+                <div class="form-group">
+                    <label for="pwd" style="font-size: 20px; color: white;">Password:</label>
+                    <input type="password" class="form-control" id="pwd" style="border-radius: 10px;" placeholder="Enter password" name="password" required>
+                </div><hr>
+               
+                <button type="submit" class="btn btn-success" style="background-color: greenyellow; color: black; border-radius: 10px; padding-left: 20%; padding-right: 20%; margin-left: 22%;"><b>Sign In</button>
+                    <p style="margin-left: 47%; color: yellow; font-family: calibri; font-size: 18px;" ><b>OR</p>
+                        
+             </form>
+            <a href="/register" class="btn btn-success" style="background-color: greenyellow; color: black; margin-left: 10%; border-radius: 10px; padding-left: 20%; padding-right: 20%;"><b>Create an Account</a>
+            
+        </div>
+       
+       
+<% include partials/footer%>

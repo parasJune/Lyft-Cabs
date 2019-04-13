@@ -1,0 +1,37 @@
+<% include partials/header%>
+
+  
+    <body style="background-color: #007eff;  background-repeat: no-repeat; max-height: 100%; background-size: 1600px 720px; 1366px;" background="zz.jpg">  
+
+
+ <div  style="background-color: #000000cc; margin-left: 8%; margin-right: 6%; margin-top: 1.8%;">
+        
+            <h3 style="font-family: Broadway; color: yellow; font-size: 28px; padding: 10px; padding-left: 15px; ">My Rides</h3>
+          <%if (typeof rides !== 'undefined' && rides.length > 0) {%>
+              <table class="table">
+                <thead class="thead-dark">
+                    <tr style="color: greenyellow;">
+                        <th scope="col">S.no.</th>
+                        <th scope="col">Pickup Location</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Fare</th>
+                    </tr>
+                </thead>
+              <tbody>
+              <%for(var i=0;i<rides.length;i++){%>
+                <tr style="color: whitesmoke;">
+                  <td><%=i+1%></td>
+                  <td><%=rides[i].pickup%></td>
+                  <td><%=rides[i].destination%></td>
+                  <td><%=rides[i].fare%></td>
+                </tr>
+              <%}%>
+              </tbody>
+            </table>    
+          <%}else{%>
+            <h1 style="color: whitesmoke;">No Rides Yet</h1>
+          <%}%>  
+        
+        </div>
+    </body>
+    <% include partials/footer%>

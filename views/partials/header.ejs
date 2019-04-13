@@ -1,0 +1,114 @@
+<html>
+
+    <head>
+    
+        
+        <title>Lyft</title>
+        <link rel="icon" type="image/png" href="lyft.png"/>
+        <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <link href="https://unpkg.com/ionicons@4.5.5/dist/css/ionicons.min.css" rel="stylesheet">
+        
+         <style>
+    
+             .report:hover{
+                text-shadow: 2px 2px 4px yellow;
+             }
+             .report:active{
+                 color: yellow;
+             }
+             
+             .signin:hover{
+                 text-shadow: 2px 2px 4px yellow;
+             }
+             .signin:active{
+                 color: yellow;
+             }
+             
+             .allreports:hover{
+                text-shadow: 2px 2px 4px yellow;
+             }
+             .allreports:active{
+                 color: yellow;
+             }
+             
+             .aboutus:hover{
+                text-shadow: 2px 2px 4px yellow;
+             }
+             .aboutus:active{
+                 color: yellow;
+             }
+             
+             .help:hover{
+                text-shadow: 2px 2px 4px yellow;
+             }
+             .help:active{
+                 color: yellow;
+             }
+             
+             .div1{
+                 position: absolute;
+                 width: 30%;
+                 height: 35%;     
+                 right:22%;
+                 top:27%;
+                 box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+                 transition: 0.3s;
+                 background-color: white;
+                 color:black;
+                 padding-top:0px; 
+                 padding-left:20px; 
+                 font-family: helvetica sans-serif; 
+                 font-size:15px;
+             }
+    
+        </style>
+        
+    </head>
+    
+   
+    
+    
+    
+       <nav class="navbar navbar-expand-md " style="background-color:#000000cc; ">
+  <a class="navbar-brand" href="/" style="color: yellow; font-family:Broadway; font-size: 35px;">Lyft</a>
+  <a  href="/book" class="button btn btn-success" style="border-color: yellow; border-radius: 20px; font-family: calibri;  background-image: linear-gradient(0deg, lightyellow, yellow); font-size: 20px; padding-left: 50px; padding-bottom: 7px; padding-top: 7px; padding-right: 50px; background-color: yellow; color: black;"> Book a Ride </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" style="border-color: white;">
+    <i class="icon ion-md-menu" style="color: aliceblue;"></i>
+  </button>
+  
+  <div class="collapse navbar-collapse" id="collapsibleNavbar"  >
+    <ul class="navbar-nav" style="margin-left: 69%;">
+      <%if(!currentUser){%>
+      <li class="nav-item">
+        <a class="nav-link" href="/login" style="font-family: Californian FB; font-size: 20px; color: white;">Sign In</a>
+      </li>
+      <%}else{%>
+      <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" style="color: white; font-family: Californian FB; font-size: 20px;  ">
+       Hi <%=currentUser.firstname%>
+      </a>
+      <div class="dropdown-menu" style="background-color:  #000000cc;">
+        <a class="dropdown-item" href="/profile" style="color: white; font-family: calibri; font-size: 20px;">My Profile</a>
+        <a class="dropdown-item" href="/ride" style="color: white; font-family: calibri; font-size: 20px;">My Rides</a>
+        <a class="dropdown-item" href="/logout" style="color: white; font-family: calibri; font-size: 20px;">Sign Out</a>
+      </div>
+      </li>
+        <%}%>
+      <li class="nav-item">
+        <a class="nav-link" href="/plans" style="font-family: Californian FB; font-size: 20px; color: white;">Our Plans</a>
+      </li>
+        
+      <li class="nav-item">
+        <a class="nav-link" href="/contactus" style="font-family: Californian FB; font-size: 20px; color: white;">Contact Us</a>
+      </li>
+       
+    </ul>
+  </div>  
+</nav>
+<br>

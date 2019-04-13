@@ -1,0 +1,186 @@
+<% include partials/header%>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Directions Service (Complex)</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 300px;
+        width:600px;
+        margin-left:650px;
+      }
+     
+     
+     
+    </style>
+  </head>
+  <body style="background-color: #007eff;  background-repeat: no-repeat; max-height: 100%; background-size: 1366px 720px; 1366px;" background="zz.jpg">
+    <input id="start" type="hidden" value="<%=pickup%>"></input>
+    <br>
+<input id="end"  type="hidden" value="<%=destination%>"></input>
+<input id="end"  type="hidden" value="<%=fare%>"></input>
+    <div id="map"></div>
+    &nbsp;
+    <div id="warnings-panel"></div>
+    <script>
+      function initMap() {
+        var markerArray = [];
+
+        // Instantiate a directions service.
+        var directionsService = new google.maps.DirectionsService;
+
+        // Create a map and center it on Manhattan.
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13
+        });
+
+        // Create a renderer for directions and bind it to the map.
+        var directionsDisplay = new google.maps.DirectionsRenderer({map: map});
+
+        // Instantiate an info window to hold step text.
+        var stepDisplay = new google.maps.InfoWindow;
+
+        // Display the route between the initial start and end selections.
+        calculateAndDisplayRoute(
+            directionsDisplay, directionsService, markerArray, stepDisplay, map);
+        // Listen to change events from the start and end lists.
+        var onChangeHandler = function() {
+          calculateAndDisplayRoute(
+              directionsDisplay, directionsService, markerArray, stepDisplay, map);
+        };
+        
+      }
+
+      function calculateAndDisplayRoute(directionsDisplay, directionsService,
+          markerArray, stepDisplay, map) {
+        // First, remove any existing markers from the map.
+        for (var i = 0; i < markerArray.length; i++) {
+          markerArray[i].setMap(null);
+        }
+
+        // Retrieve the start and end locations and create a DirectionsRequest using
+        // WALKING directions.
+        directionsService.route({
+          origin: document.getElementById('start').value,
+          destination:document.getElementById('end').value,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          // Route the directions and pass the response to a function to create
+          // markers for each step.
+          if (status === 'OK') {
+            document.getElementById('warnings-panel').innerHTML =
+                '<b>' + response.routes[0].warnings + '</b>';
+            directionsDisplay.setDirections(response);
+            showSteps(response, markerArray, stepDisplay, map);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+
+     
+
+      function attachInstructionText(stepDisplay, marker, text, map) {
+        google.maps.event.addListener(marker, 'click', function() {
+          // Open an info window when the marker is clicked on, containing the text
+          // of the step.
+          stepDisplay.setContent(text);
+          stepDisplay.open(map, marker);
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASDBmsHq8FJYVKwFrkiuxAgDRuO-CnW3Y&callback=initMap">
+    </script>
+    <div style="margin-right: 65%; margin-left: 5%;margin-top:-25%">
+        <h1 style="background-color: #000000cc; font-family: broadway; color: yellow; font-size: 30px; padding-left: 3%; padding-bottom: 1%; padding-top: 1%;">Found a Ride</h1>        
+        
+    <table class="table table-dark" style="font-size: 20px; background-color:  #000000cc; margin-top: -4%; ">
+    <thead >
+      <tr >
+        <th>Estimated Travel Time</th><br>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%=duration%></td><br>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+        
+         
+        
+        
+         <table class="table table-dark" style="font-size: 20px; background-color:  #000000cc;">
+    <thead>
+      <tr>
+        
+        
+        <th>Distance in kms</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+       
+        <td> <%=distance%> </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+      
+      
+      
+       <table class="table table-dark" style="font-size: 20px; background-color:  #000000cc;">
+    <thead>
+      <tr>
+        
+        
+        <th>Fare</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+       
+        <td> <%=fare%>           </td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+      
+      <form action="/confirmed" method="POST">
+    <input type="hidden" value="<%=pickup%>" name="pickup"></input>
+    <br>
+<input type="hidden" value="<%=destination%>" name="destination"></input>
+<input type="hidden"  value="<%=fare%>" name="fare"></input>
+    <button style=" background-color: greenyellow; border-radius: 20px; border-color: greenyellow; padding-left: 5%; padding-right: 5%;"> Book </button>
+    
+</form>
+      
+        
+        
+         
+        
+        
+        
+        
+       </div> 
+        
+        
+
+        </div>
+  </body>
+</html>
+
+
+<% include partials/footer%>
