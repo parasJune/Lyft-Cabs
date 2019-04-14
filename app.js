@@ -10,7 +10,7 @@ var express = require("express"),
     
 mongoose.set('useCreateIndex', true);    
 //mongoose.connect("mongodb://localhost:27017/cabs",{useNewUrlParser : true});
-mongoose.connect("mongodb://Paras:PARAS123@ds139576.mlab.com:39576/lyftcabs",{useNewUrlParser : true});
+mongoose.connect("mongodb://<dbuser>:<dbpassword>@ds139576.mlab.com:39576/lyftcabs",{useNewUrlParser : true});
 var app = express();
 app.set("view engine","ejs");
 app.use(express.static('public'))
@@ -86,7 +86,7 @@ app.get("/book",function(req, res) {
 });
 
 
-distance.key('AIzaSyASDBmsHq8FJYVKwFrkiuxAgDRuO-CnW3Y');
+distance.key('Your-API-Key');
 app.post("/book",isLoggedIn,function(req, res) {
     console.log(req.user)
     var origins = req.body.pickup;
@@ -127,7 +127,7 @@ app.post("/confirmed",function(req, res) {
     req.user.Rides.push({pickup:req.body.pickup,destination:req.body.destination,fare:req.body.fare});
     req.user.save()
     var SendOtp = require('sendotp');
-    var sendOtp = new SendOtp('270368AlPgqlIaa5ca21fd5',"Your Ride is booked from  "+req.body.pickup+" to "+req.body.destination+"  Please share the OTP:{{otp}} with the driver before starting the ride");
+    var sendOtp = new SendOtp('Your API Key',"Your Ride is booked from  "+req.body.pickup+" to "+req.body.destination+"  Please share the OTP:{{otp}} with the driver before starting the ride");
     sendOtp.send(req.user.number, "LYFTCABS", function (error, data) {
         console.log(data);
 })
